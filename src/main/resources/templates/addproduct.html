@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Welcome - Inovice App</title>
+</head>
+<body>
+    <form action="#" th:action="@{/addproduct}" th:object="${newProduct}" method="post">
+
+        <span th:if="${#fields.hasErrors('id')}" th:error="*{id}">Id Error</span>
+        <p>Enter product ID: <input type="text" th:field="*{id}"/></p>
+
+
+        <p>Enter product price: <input type="text" th:field="*{price}"/></p>
+
+        <span th:if="${#fields.hasErrors('description')}" th:error="*{description}">Description Error</span>
+        <p>Enter product description: <input type="text" th:field="*{description}"/></p>
+
+        <input type="submit" value="Add product" />
+    </form>
+
+
+</body>
+</html>
