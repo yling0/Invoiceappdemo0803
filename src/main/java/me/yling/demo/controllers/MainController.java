@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
@@ -35,8 +36,8 @@ public class MainController {
     public String postProduct(@Valid @ModelAttribute("newProduct") Product product, BindingResult bindingResult)
     {
 
-        //System.out.println(bindingResult.toString());
-        // System.out.println(product.getDescription());
+        System.out.println(bindingResult.toString());
+        System.out.println(product.getDescription());
 
         if (bindingResult.hasErrors())
         {
@@ -46,5 +47,13 @@ public class MainController {
         productRepository.save(product);
         return "result";
     }
+
+    @GetMapping("/showproducts")
+    public @ResponseBody String showAllProducts()
+    {
+        Iterable<Product> productList = productRepository.findAll();
+        return productList.toString();
+    }
+
 
 }
